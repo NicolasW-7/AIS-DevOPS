@@ -1,0 +1,11 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Exclure les fichiers binaires des traitements de fin de ligne
+*.jpg binary
+*.png binary
+*.exe binary
+*.zip binary
+
+# Ne pas modifier les fins de ligne de ces fichiers spécifiques
+*.md -text
