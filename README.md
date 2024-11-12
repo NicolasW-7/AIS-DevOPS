@@ -6,7 +6,7 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white) ![ANSIBLE](https://img.shields.io/badge/ansible-%231A1918.svg?style=for-the-badge&logo=ansible&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 # 📊 GitHub Stats: **AIS-Brief-et-TIPS**
 
-![GitHub Created At](https://img.shields.io/github/created-at/NicolasW-7/AIS-Brief-et-TIPS) ![GitHub contributors](https://img.shields.io/github/contributors/NicolasW-7/AIS-Brief-et-TIPS) ![GitHub last commit](https://img.shields.io/github/last-commit/NicolasW-7/AIS-Brief-et-TIPS) 
+![GitHub Created At](https://img.shields.io/github/created-at/NicolasW-7/AIS-DevOPS) ![GitHub contributors](https://img.shields.io/github/contributors/NicolasW-7/AIS-DevOPS) ![GitHub License](https://img.shields.io/github/license/NicolasW-7/AIS-DevOPS) ![GitHub repo size](https://img.shields.io/github/repo-size/NicolasW-7/AIS-DevOPS)
 
 # About my GitHub
 
