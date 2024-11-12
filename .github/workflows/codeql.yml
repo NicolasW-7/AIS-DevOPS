@@ -119,7 +119,8 @@ jobs:
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: 'javascript'
+        languages: 'csharp'
+        build-command: 'dotnet build --configuration Release --no-incremental'
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
