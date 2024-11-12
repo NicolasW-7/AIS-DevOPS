@@ -59,4 +59,4 @@
 - Fichier : 
             - docker-compose.yml https://github.com/NicolasW-7/AIS-DevOPS/blob/main/DevOPS/Docker/docker-compose.yml
             - rsync_db.sh : https://github.com/NicolasW-7/AIS-DevOPS/blob/main/DevOPS/rsync_db.sh
-            - https://github.com/NicolasW-7/AIS-DevOPS/blob/main/DevOPS/Caddyfile
+            - Caddyfile : https://github.com/NicolasW-7/AIS-DevOPS/blob/main/DevOPS/Caddyfile
