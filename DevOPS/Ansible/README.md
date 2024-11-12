@@ -18,9 +18,16 @@
 
 - Playbooks : Un playbook est un fichier YAML où l’on définit une série d'actions (ou tâches) pour configurer ou gérer les machines. C'est ici que l'on orchestre les modules pour réaliser des opérations précises.
 
+![HowAnsibleWorks](https://github.com/NicolasW-7/AIS-DevOPS/blob/main/Images/HowAnsibleWorks.jpg)
 
+# Comment installer ![ANSIBLE](https://img.shields.io/badge/ansible-%231A1918.svg?style=for-the-badge&logo=ansible&logoColor=white)
 
+*Ansible est inclus dans les dépôts officiels, donc vous pouvez l’installer directement :*
 
+```bash
+sudo apt update
+sudo apt install -y ansible
+```
 Exemple simple de playbook :
 
 ```yaml
