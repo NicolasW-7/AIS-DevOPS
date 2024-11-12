@@ -1,4 +1,3 @@
-
 ---
 - name: Secure Windows Server 2022 with Active Directory
   hosts: windows
