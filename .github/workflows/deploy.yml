@@ -1,15 +1,9 @@
 name: Deploy Docker Services
 
 on:
-  workflow_dispatch:  # Permet de déclencher le workflow manuellement
-    inputs:
-      domain:  # Demande un input pour le domaine
-        description: "Enter your domain (e.g., vault.example.com)"
-        required: true
-        default: "vault.example.com"
-      admin_token:  # Demande un input pour le token admin
-        description: "Enter your Admin Token"
-        required: true
+  push:  # Déclenche le workflow à chaque commit pushé sur une branche spécifique
+    branches:
+      - main  # Remplacez "main" par le nom de la branche cible, si nécessaire
 
 jobs:
   deploy:
@@ -27,15 +21,17 @@ jobs:
 
     # Étape 3 : Remplacer les variables dans les fichiers
     - name: Update docker-compose.yml and Caddyfile
+      env:
+        DOMAIN: ${{ secrets.DOMAIN }}  # Domaine stocké comme secret GitHub
+        ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}  # Token Admin stocké comme secret GitHub
       run: |
-        # Remplace le domaine dans docker-compose.yml et Caddyfile
-        sed -i "s|YourDomain|${{ inputs.domain }}|g" DevOPS/Docker/docker-compose.yml
-        sed -i "s|*your domain name*|${{ inputs.domain }}|g" DevOPS/Docker/Caddyfile
-        sed -i "s|cf.Argon2section|${{ inputs.admin_token }}|g" DevOPS/Docker/docker-compose.yml
+        # Remplace le domaine et le token dans docker-compose.yml
+        sed -i "s|YourDomain|${DOMAIN}|g" DevOPS/Docker/docker-compose.yml
+        sed -i "s|*your domain name*|${DOMAIN}|g" DevOPS/Docker/Caddyfile
+        sed -i "s|cf.Argon2section|${ADMIN_TOKEN}|g" DevOPS/Docker/docker-compose.yml
 
     # Étape 4 : Déployer Docker Compose
     - name: Deploy Docker Compose
       run: |
         cd DevOPS/Docker
         docker-compose up -d
-
