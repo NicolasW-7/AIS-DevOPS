@@ -10,39 +10,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Étape 1 : Vérifier le dépôt
-      - name: Checkout code
-        uses: actions/checkout@v3
+    # Étape 1 : Vérifier le dépôt
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      # Étape 2 : Installer Docker et Docker Compose
-      - name: Install Docker and Docker Compose
-        run: |
-          sudo apt-get update
-          sudo apt-get remove -y containerd  # Supprimer containerd s'il est déjà installé
-          sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-archive-keyring.gpg
-          echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-          sudo apt-get update
-          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-          sudo apt-get install -y docker-compose
+    # Étape 2 : Installer Docker et Docker Compose
+    - name: Install Docker and Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get remove -y containerd  # Supprimer containerd s'il est déjà installé
+        sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/docker-archive-keyring.gpg
+        echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        sudo apt-get update
+        sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+        sudo apt-get install -y docker-compose
 
-      # Étape 3 : Remplacer les variables dans docker-compose.yml et Caddyfile
-      - name: Replace Variables in docker-compose.yml
-        env:
-          DOMAIN: ${{ secrets.DOMAIN }}
-          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
-        run: |
-          # Remplacer le domaine et le token dans docker-compose.yml
-          if [ -f "DevOPS/Docker/docker-compose.yml" ]; then
-            sed -i "s|YourDomain|${DOMAIN}|g" DevOPS/Docker/docker-compose.yml
-            sed -i "s|cf.Argon2section|${ADMIN_TOKEN}|g" DevOPS/Docker/docker-compose.yml
-          else
-            echo "docker-compose.yml not found!"
-            exit 1
-          fi
+    # Étape 3 : Remplacer les variables dans docker-compose.yml
+    - name: Replace Variables in docker-compose.yml
+      env:
+        DOMAIN: ${{ secrets.DOMAIN }}  # Domaine stocké comme secret GitHub
+      run: |
+        # Remplacer le domaine dans docker-compose.yml
+        if [ -f "DevOPS/Docker/docker-compose.yml" ]; then
+          sed -i "s|http://testvaultwarden.local|${DOMAIN}|g" DevOPS/Docker/docker-compose.yml
+        else
+          echo "docker-compose.yml not found!"
+          exit 1
+        fi
 
-      # Étape 4 : Déployer Docker Compose
-      - name: Deploy Docker Compose
-        run: |
-          cd DevOPS/Docker
-          sudo docker-compose up -d
+    # Étape 4 : Déployer Docker Compose
+    - name: Deploy Docker Compose
+      run: |
+        cd DevOPS/Docker
+        sudo docker-compose up -d
+
