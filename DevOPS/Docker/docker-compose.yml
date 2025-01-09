@@ -17,14 +17,16 @@ services:
     container_name: caddy
     restart: always
     ports:
-      # Needed for the ACME HTTP-01 challenge.
-      - 443:443
+      - 443:443  # Port 443 pour le challenge HTTP-01 d'ACME
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - ./ssl:/ssl
-      - caddy-config:/config
-      - caddy-data:/data
-      - caddy-logs:/logs
+      - ./DevOPS/Caddyfile:/etc/caddy/Caddyfile:ro  # Chemin correct vers Caddyfile
+      - ./ssl:/ssl  # Dossier SSL
+      - caddy-config:/config  # Volume pour la configuration
+      - caddy-data:/data  # Volume pour les données
+      - caddy-logs:/logs  # Volume pour les logs
+    environment:
+      - DOMAIN=${{ secrets.DOMAIN }}  # Domaine stocké comme secret GitHub
+      - EMAIL=${{ secrets.EMAIL }}  # Email pour ACME
     environment:
       - DOMAIN= # Your domain.
       #EMAIL: "YOUR EMAIL"                 # The email address to use for ACME registration.
