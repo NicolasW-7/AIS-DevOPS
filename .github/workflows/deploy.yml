@@ -1,9 +1,9 @@
 name: Deploy Docker Services
 
 on:
-  push:  # Déclenche le workflow à chaque commit pushé sur une branche spécifique
+  push:
     branches:
-      - main  # Remplacez "main" par le nom de la branche cible, si nécessaire
+      - main  # Déclenche le workflow sur chaque commit pushé dans la branche main
 
 jobs:
   deploy:
@@ -17,7 +17,7 @@ jobs:
     # Étape 2 : Débogage (Lister les fichiers et répertoires)
     - name: Debug Files
       run: |
-        ls -R DevOPS/Docker
+        ls -R DevOPS  # Lister tous les fichiers et répertoires sous DevOPS
 
     # Étape 3 : Remplacer les variables dans les fichiers
     - name: Update docker-compose.yml and Caddyfile
@@ -25,10 +25,22 @@ jobs:
         DOMAIN: ${{ secrets.DOMAIN }}  # Domaine stocké comme secret GitHub
         ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}  # Token Admin stocké comme secret GitHub
       run: |
-        # Remplace le domaine et le token dans docker-compose.yml
-        sed -i "s|YourDomain|${DOMAIN}|g" DevOPS/Docker/docker-compose.yml
-        sed -i "s|*your domain name*|${DOMAIN}|g" DevOPS/Docker/Caddyfile
-        sed -i "s|cf.Argon2section|${ADMIN_TOKEN}|g" DevOPS/Docker/docker-compose.yml
+        # Remplacer le domaine et le token dans docker-compose.yml
+        if [ -f "DevOPS/Docker/docker-compose.yml" ]; then
+          sed -i "s|YourDomain|${DOMAIN}|g" DevOPS/Docker/docker-compose.yml
+          sed -i "s|cf.Argon2section|${ADMIN_TOKEN}|g" DevOPS/Docker/docker-compose.yml
+        else
+          echo "docker-compose.yml not found!"
+          exit 1
+        fi
+
+        # Remplacer le domaine dans Caddyfile
+        if [ -f "DevOPS/Caddyfile" ]; then
+          sed -i "s|*your domain name*|${DOMAIN}|g" DevOPS/Caddyfile
+        else
+          echo "Caddyfile not found!"
+          exit 1
+        fi
 
     # Étape 4 : Déployer Docker Compose
     - name: Deploy Docker Compose
