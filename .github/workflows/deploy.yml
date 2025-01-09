@@ -1,9 +1,12 @@
 name: Deploy Docker Services
 
 on:
-  push:
-    branches:
-      - main  # Déclenche le workflow sur chaque commit pushé dans la branche main
+  workflow_dispatch:  # Cela permet de déclencher manuellement le workflow
+    inputs:
+      environment:
+        description: 'Choisir l\'environnement de déploiement'
+        required: true
+        default: 'production'
 
 jobs:
   deploy:
