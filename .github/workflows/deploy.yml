@@ -4,7 +4,7 @@ on:
   workflow_dispatch:  # Cela permet de déclencher manuellement le workflow
     inputs:
       environment:
-        description: 'Choisir l\'environnement de déploiement'
+        description: 'Vaultwarden'
         required: true
         default: 'production'
 
