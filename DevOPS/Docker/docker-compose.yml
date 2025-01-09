@@ -19,16 +19,15 @@ services:
     ports:
       - 443:443  # Port 443 pour le challenge HTTP-01 d'ACME
     volumes:
-      - ./DevOPS/Caddyfile:/etc/caddy/Caddyfile:ro  # Chemin correct vers Caddyfile
+      - - ${GITHUB_WORKSPACE}/DevOPS/Caddyfile:/etc/caddy/Caddyfile:ro  # Chemin correct vers Caddyfile
       - ./ssl:/ssl  # Dossier SSL
       - caddy-config:/config  # Volume pour la configuration
       - caddy-data:/data  # Volume pour les données
       - caddy-logs:/logs  # Volume pour les logs
-    environment:
-      - DOMAIN=${{ secrets.DOMAIN }}  # Domaine stocké comme secret GitHub
-      - EMAIL=${{ secrets.EMAIL }}  # Email pour ACME
-    environment:
-      - DOMAIN= # Your domain.
+  environment:
+    - DOMAIN=${{ secrets.DOMAIN }}  # Secret GitHub variable
+    - EMAIL=${{ secrets.EMAIL }}    # Secret GitHub variable
+    - ADMIN_TOKEN=${{ secrets.ADMIN_TOKEN }}  # Secret GitHub variable
       #EMAIL: "YOUR EMAIL"                 # The email address to use for ACME registration.
       #LOG_FILE: "/data/access.log"
 
