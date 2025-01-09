@@ -5,7 +5,7 @@ Docker est une plateforme qui permet de créer, déployer et exécuter des appli
 
 ## Fonctionnement de Docker :
 
-- Images Docker : Une image est un modèle statique contenant tout ce dont une application a besoin pour fonctionner (code, bibliothèques, dépendances). Les images Docker sont créées à partir d'un fichier de configuration appelé Dockerfile, qui définit la structure de l'image.
+- Images Docker :  Une image est un modèle statique contenant tout ce dont une application a besoin pour fonctionner (code, bibliothèques, dépendances). Les images Docker sont créées à partir d'un fichier de configuration appelé Dockerfile, qui définit la structure de l'image.
 
 - Containers Docker : Un container est une instance exécutable d’une image. Lorsqu'une image est lancée, Docker crée un container qui isole l’application de l’environnement sous-jacent tout en permettant à celle-ci de fonctionner normalement. Plusieurs containers peuvent être exécutés à partir de la même image.
 
