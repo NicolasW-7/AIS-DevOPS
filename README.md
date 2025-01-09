@@ -1,4 +1,4 @@
-# 💫 About Me:
+#  💫 About Me:
 👋 Bonjour je m'appelle Nicolas <br>🌱 Je suis actuellement en formation d'administrateur d'infrastructure sécurisée / DevOPS <br>🛡️ Je travaille en ce moment sur la mise en production de Vaultwarden <br>👀 Je découvre CodeQL <br>🤖 Apprend les bases de scritping bash/shel et de la réplication <br> 
 
 
