@@ -14,13 +14,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Étape 2 : Débogage (Lister les fichiers et répertoires)
-    - name: Debug Files
-      run: |
-        ls -R DevOPS  # Lister tous les fichiers et répertoires sous DevOPS
-
-    # Étape 3 : Installer Docker et Docker Compose
-    - name: Install Docker and Docker Compose from Docker's official repository
+    # Étape 2 : Installer Docker et Docker Compose
+    - name: Install Docker and Docker Compose
       run: |
         sudo apt-get update
         sudo apt-get remove -y containerd  # Supprimer containerd s'il est déjà installé
@@ -31,8 +26,8 @@ jobs:
         sudo apt-get install -y docker-ce docker-ce-cli containerd.io
         sudo apt-get install -y docker-compose
 
-    # Étape 4 : Remplacer les variables dans les fichiers
-    - name: Update docker-compose.yml and Caddyfile
+    # Étape 3 : Remplacer les variables dans docker-compose.yml et Caddyfile
+    - name: Replace Variables in docker-compose.yml and Caddyfile
       env:
         DOMAIN: ${{ secrets.DOMAIN }}  # Domaine stocké comme secret GitHub
         ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}  # Token Admin stocké comme secret GitHub
@@ -54,7 +49,7 @@ jobs:
           exit 1
         fi
 
-    # Étape 5 : Déployer Docker Compose
+    # Étape 4 : Déployer Docker Compose
     - name: Deploy Docker Compose
       run: |
         cd DevOPS/Docker
