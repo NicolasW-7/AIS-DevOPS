@@ -25,9 +25,9 @@ services:
       - caddy-data:/data  # Volume pour les données
       - caddy-logs:/logs  # Volume pour les logs
   environment:
-    - DOMAIN=${{ secrets.DOMAIN }}  # Secret GitHub variable
-    - EMAIL=${{ secrets.EMAIL }}    # Secret GitHub variable
-    - ADMIN_TOKEN=${{ secrets.ADMIN_TOKEN }}  # Secret GitHub variable
+    - DOMAIN: ${{ secrets.DOMAIN }}  # Secret GitHub variable
+    - EMAIL: ${{ secrets.EMAIL }}    # Secret GitHub variable
+    - ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}  # Secret GitHub variable
       #EMAIL: "YOUR EMAIL"                 # The email address to use for ACME registration.
       #LOG_FILE: "/data/access.log"
 
