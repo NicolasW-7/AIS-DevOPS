@@ -19,7 +19,14 @@ jobs:
       run: |
         ls -R DevOPS  # Lister tous les fichiers et répertoires sous DevOPS
 
-    # Étape 3 : Remplacer les variables dans les fichiers
+    # Étape 3 : Installer Docker et Docker Compose
+    - name: Install Docker and Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker.io
+        sudo apt-get install -y docker-compose
+
+    # Étape 4 : Remplacer les variables dans les fichiers
     - name: Update docker-compose.yml and Caddyfile
       env:
         DOMAIN: ${{ secrets.DOMAIN }}  # Domaine stocké comme secret GitHub
@@ -42,8 +49,8 @@ jobs:
           exit 1
         fi
 
-    # Étape 4 : Déployer Docker Compose
+    # Étape 5 : Déployer Docker Compose
     - name: Deploy Docker Compose
       run: |
         cd DevOPS/Docker
-        docker-compose up -d
+        sudo docker-compose up -d
