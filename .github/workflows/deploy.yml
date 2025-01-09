@@ -27,7 +27,7 @@ jobs:
           sudo apt-get install -y docker-compose
 
       # Étape 3 : Remplacer les variables dans docker-compose.yml et Caddyfile
-      - name: Replace Variables in docker-compose.yml and Caddyfile
+      - name: Replace Variables in docker-compose.yml
         env:
           DOMAIN: ${{ secrets.DOMAIN }}
           ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
@@ -38,14 +38,6 @@ jobs:
             sed -i "s|cf.Argon2section|${ADMIN_TOKEN}|g" DevOPS/Docker/docker-compose.yml
           else
             echo "docker-compose.yml not found!"
-            exit 1
-          fi
-
-          # Remplacer le domaine dans Caddyfile
-          if [ -f "DevOPS/Caddyfile" ]; then
-            sed -i "s|*your domain name*|${DOMAIN}|g" DevOPS/Caddyfile
-          else
-            echo "Caddyfile not found!"
             exit 1
           fi
 
