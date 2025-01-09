@@ -23,8 +23,10 @@ jobs:
     - name: Install Docker and Docker Compose
       run: |
         sudo apt-get update
+        sudo apt-get remove -y containerd  # Désinstalle containerd s'il est déjà présent
         sudo apt-get install -y docker.io
         sudo apt-get install -y docker-compose
+
 
     # Étape 4 : Remplacer les variables dans les fichiers
     - name: Update docker-compose.yml and Caddyfile
