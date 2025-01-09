@@ -6,7 +6,7 @@ services:
     container_name: vaultwarden
     restart: always
     environment:
-      WEBSOCKET_ENABLED: true
+      WEBSOCKET_ENABLED: "true"
       ADMIN_TOKEN: cf.Argon2section #YourAdminToken
       DOMAIN: "YourDomain" # Your domain; vaultwarden needs to know it's https to work properly with attachments
     volumes:
