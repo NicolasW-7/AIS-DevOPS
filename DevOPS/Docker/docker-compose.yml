@@ -6,31 +6,7 @@ services:
     container_name: vaultwarden
     restart: always
     environment:
-      WEBSOCKET_ENABLED: "true"
-      ADMIN_TOKEN: cf.Argon2section #YourAdminToken
+      WEBSOCKET_ENABLED: "false"
       DOMAIN: "YourDomain" # Your domain; vaultwarden needs to know it's https to work properly with attachments
     volumes:
       - vw-data:/data
-
-  caddy:
-    image: caddy:2
-    container_name: caddy
-    restart: always
-    ports:
-      - 443:443  # Port 443 pour le challenge HTTP-01 d'ACME
-    volumes:
-      - ${GITHUB_WORKSPACE}/DevOPS/Caddyfile:/etc/caddy/Caddyfile:ro  # Chemin correct vers Caddyfile
-      - ./ssl:/ssl  # Dossier SSL
-      - caddy-config:/config  # Volume pour la configuration
-      - caddy-data:/data  # Volume pour les données
-      - caddy-logs:/logs  # Volume pour les logs
-    environment:
-      DOMAIN: ${{ secrets.DOMAIN }}  # Secret GitHub variable
-      EMAIL: ${{ secrets.EMAIL }}    # Secret GitHub variable
-      ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}  # Secret GitHub variable
-
-volumes:
-  vw-data:
-  caddy-config:
-  caddy-data:
-  caddy-logs:
