@@ -47,4 +47,5 @@ jobs:
       run: |
         cd DevOPS/Docker
         sudo docker-compose up -d
+        sudo docker ps -a
 
